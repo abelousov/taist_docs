@@ -17,6 +17,7 @@ Data can also be stored on Taist server:
 
 * user-level data is processed via ``userData``
 * company-level data (shared between all company members) is processed via ``companyData``
+* addon-level data (shared between all company members in single addon) is processed via ``addonData``
 
 ``userData`` and ``companyData`` have the same basic interface:
 
@@ -59,4 +60,25 @@ Example:
 
   foo.bar = 1
   foo = {"bar":1,"baz":{"newBaz":true}}
+  */
+
+Addon data: working with repository of models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``addonData`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
+
+* ``define(modelName, schema)`` - defines model ``modelName`` with schema ``schema``
+* ``getRepository(modelName)`` - return repository of models stored as ``modelName`` that can be user to retrieve, save or delete ``modelName`` models
+
+Example:
+
+.. code-block:: javascript
+
+  taistApi.models.define('myModel', { name: 'String', age: 'Integer' })
+
+  var repository = taistApi.models.getRepository('myModel')
+
+  /*
+  output:
+
+  repository = {getAll: function, create: function, save: function, delete: function}
   */
