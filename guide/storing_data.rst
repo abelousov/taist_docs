@@ -66,14 +66,14 @@ Addon data: working with repository of models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``addonData`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
 
-* ``define(modelName, schema)`` - defines model ``modelName`` with schema ``schema``
+* ``define(modelName, schema)`` - defines model ``modelName`` with schema ``schema``. Schema implements types ``String``, ``Number``, ``Object``, ``Boolean``
 * ``getRepository(modelName)`` - return repository of models stored as ``modelName`` that can be user to retrieve, save or delete ``modelName`` models
 
 Example:
 
 .. code-block:: javascript
 
-  taistApi.models.define('myModel', { name: 'String', age: 'Integer' })
+  taistApi.models.define('myModel', { name: 'String', age: 'Number' })
 
   var repository = taistApi.models.getRepository('myModel')
 
