@@ -62,12 +62,12 @@ Example:
   foo = {"bar":1,"baz":{"newBaz":true}}
   */
 
-Addon data: working with repository of models
+Model data: working with repository of models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``addonData`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
+``models`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
 
 * ``define(modelName, schema)`` - defines model ``modelName`` with schema ``schema``. Schema implements types ``String``, ``Number``, ``Object``, ``Boolean``
-* ``getRepository(modelName)`` - return repository of models stored as ``modelName`` that can be user to retrieve, save or delete ``modelName`` models
+* ``getRepository(modelName)`` - returns repository of models stored as ``modelName`` that can be used to retrieve, save or delete ``modelName`` models
 
 Example:
 
