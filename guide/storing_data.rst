@@ -85,12 +85,12 @@ Example:
 
 ``repository`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
 
-all ``repository`` methods except ``create`` is asynchronous and return promise object.
+All ``repository`` methods except ``create`` is asynchronous and return promise object.
 
 * ``create(data)`` - creates ``model`` object. Then ``model`` can be added to repository using ``save``. Generates unique id if it's not passed in ``data``
 * ``save(model)`` - add ``model`` to ``repository`` and save it to server. Saved ``model`` can be retrieved by ``getAll`` and ``find``. Saves only fields that defined in ``schema``
 * ``getAll()`` - get all models stored in ``repository``
-* ``find(criteria)`` - find ``model`` by ``criteria``. ``criteria`` is mongo-like find query object
+* ``find(criteria)`` - find ``model`` by ``criteria``. ``Criteria`` is mongo-like find query object
 * ``delete(model)`` - delete ``model`` from repository. ``Model`` will be immediately and forever deleted from server.
 
 Example:
