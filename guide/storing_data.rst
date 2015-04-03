@@ -64,7 +64,7 @@ Example:
 
 Model data: working with repository of models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``models`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
+``models`` allows to define and get repository of stored on server models:
 
 * ``define(modelName, schema)`` - defines model ``modelName`` with schema ``schema``. Schema implements types ``String``, ``Number``, ``Object``, ``Boolean``
 * ``getRepository(modelName)`` - returns repository of models stored as ``modelName`` that can be used to retrieve, save or delete ``modelName`` models
@@ -81,4 +81,53 @@ Example:
   output:
 
   repository = {getAll: function, create: function, save: function, delete: function}
+  */
+
+``repository`` allows to add or retrieve (all or filtered by criteria) models, stored on server:
+
+all ``repository`` methods except ``create`` is asynchronous and return promise object.
+
+* ``create(data)`` - creates ``model`` object. Then ``model`` can be added to repository using ``save``. Generates unique id if it's not passed in ``data``
+* ``save(model)`` - add ``model`` to ``repository`` and save it to server. Saved ``model`` can be retrieved by ``getAll`` and ``find``. Saves only fields that defined in ``schema``
+* ``getAll()`` - get all models stored in ``repository``
+* ``find(criteria)`` - find ``model`` by ``criteria``. ``criteria`` is mongo-like find query object
+* ``delete(model)`` - delete ``model`` from repository. ``Model`` will be immediately and forever deleted from server.
+
+Example:
+
+.. code-block:: javascript
+
+  taistApi.models.define('myModel', { name: 'String', age: 'Number' })
+
+  var repository = taistApi.models.getRepository('myModel')
+
+  var model = repository.create({ name: 'Alex', age: '16', undefinedField: 'undefined' })
+
+  repository.save(model)
+
+  var savedModels = repository.getAll()
+
+  repository.save(repository.create({ name: 'Kate', age: '17' }))
+
+  var filteredModels = repository.find({ name: 'Alex' })
+
+  repositoryDelete(filteredModels)
+
+  var modelsAfterDelition = repository.getAll()
+
+
+  /*
+  output:
+
+  repository = {getAll: function, create: function, save: function, delete: function}
+
+  model = {name: 'Alex', age: '16', undefinedField: 'undefined', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}
+
+  savedModels = [{name: 'Alex', age: '16', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}]
+
+  filteredModels = [{name: 'Alex', age: '16', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}]
+
+  modelsAfterDelition = [{name: 'Kate', age: '17', id: 'D790D359-AB3D-4657-A864-FA89FACB3E99'}]
+
+
   */
