@@ -101,11 +101,22 @@ Example:
 
   var repository = taistApi.models.getRepository('myModel')
 
-  var model = repository.create({ name: 'Alex', age: '16', undefinedField: 'undefined' })
+  var model = repository.create({ name: 'Alex', age: '16', fieldNotInSchema: 'willNotBeSaved' })
 
   repository.save(model)
+    .then(
+      function() {
+        var savedModels = repository.getAll()
 
-  var savedModels = repository.getAll()
+        }
+    )
+    .then(
+      function() {
+
+      }
+    )
+
+
 
   repository.save(repository.create({ name: 'Kate', age: '17' }))
 
