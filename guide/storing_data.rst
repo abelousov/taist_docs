@@ -97,34 +97,39 @@ Example:
 
 .. code-block:: javascript
 
-  taistApi.models.define('myModel', { name: 'String', age: 'Number' })
+  taistApi.models.define('myModel', { name: 'String', age: 'Number' });
 
-  var repository = taistApi.models.getRepository('myModel')
+var repository = taistApi.models.getRepository('myModel');
 
-  var model = repository.create({ name: 'Alex', age: '16', fieldNotInSchema: 'willNotBeSaved' })
+taistApi.log('repository =', repository);
 
-  repository.save(model)
-    .then(
-      function() {
-        var savedModels = repository.getAll()
+var model = repository.create({ name: 'Alex', age: '16', notInSchema: 'willNotBeSaved' });
 
-        }
-    )
-    .then(
-      function() {
+taistApi.log('model =', model);
 
-      }
-    )
+repository.save(model)
+    .then(function() {
+        return repository.getAll()
+    })
+    .then(function(savedModels) {
+        taistApi.log('savedModels =', savedModels);
 
+        repository.save(repository.create({ name: 'Kate', age: '17' }))
+    })
+    .then(function() {
+        return repository.find({ name: 'Alex' })
+    })
+    .then(function(filteredModels) {
+        taistApi.log('filteredModels =', filteredModels);
 
-
-  repository.save(repository.create({ name: 'Kate', age: '17' }))
-
-  var filteredModels = repository.find({ name: 'Alex' })
-
-  repositoryDelete(filteredModels)
-
-  var modelsAfterDelition = repository.getAll()
+        return repository.delete(filteredModels)
+    })
+    .then(function() {
+        return repository.getAll()
+    })
+    .then(function(modelsAfterDelition) {
+        taistApi.log('modelsAfterDelition =', modelsAfterDelition);
+    });
 
 
   /*
