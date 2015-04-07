@@ -137,7 +137,7 @@ Example:
 
   repository = {getAll: function, create: function, save: function, delete: function}
 
-  model = {name: 'Alex', age: '16', undefinedField: 'undefined', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}
+  model = {name: 'Alex', age: '16', notInSchema: 'willNotBeSaved', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}
 
   savedModels = [{name: 'Alex', age: '16', id: '21EC2020-3AEA-4069-A2DD-08002B30309D'}]
 
